@@ -43,10 +43,10 @@ router.post('/signup', (req, res, next) => {
 		const hashPass = bcrypt.hashSync(password, salt);
 
 		const newUser = new User({
-			username,
+			username, 
 			password: hashPass
 		});
-
+		
 		newUser
 			.save()
 			.then(() => {
