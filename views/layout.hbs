@@ -6,18 +6,24 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{title}}</title>
   <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="/stylesheets/trekkingStyle.css" />
 </head>
 <body>
+
+  <h2>ESTO VIENE DEL LAYOUT.HBS</h2>
 
   <nav>
     <a href="/">Home</a>
     <a href="/auth/login">Login</a>
     <a href="/auth/signup">Signup</a>
     <a href="/auth/logout">Logout</a>
+    <a href="/rutas/predefinidas">Rutas predefinidas</a>
+ 
   </nav>
 
   {{{body}}}
-
+  {{!-- <script src="https://maps.googleapis.com/maps/api/js?key={{key}}"></script> --}}
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiH3q8FBHvFg1fDE5dm0PIRcJky_DpvF8"></script>
   <script src="/javascripts/script.js"></script>
 </body>
 </html>
