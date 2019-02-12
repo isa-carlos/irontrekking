@@ -28,6 +28,8 @@ const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.
 
 const app = express();
 
+app.locals.API_KEY = process.env.API_KEY;
+
 // Middleware Setup
 // para que pueda entender informacion del post enviada por json
 app.use(logger('dev'));
@@ -87,6 +89,6 @@ app.use('/auth', authRoutes);
 const private = require('./routes/profile');
 app.use('/profile', private);
 
-const rutas = require("./routes/rutas");
-app.use("/rutas", rutas);
+const rutas = require('./routes/rutas');
+app.use('/rutas', rutas);
 module.exports = app;
