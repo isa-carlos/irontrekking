@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Route = require('../models/route');
+const User = require('../models/User');
 const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
 
 // vamos a buscar todas las rutas de nuestra base de datos
@@ -20,7 +21,7 @@ router.get('/predefinidas', ensureLoggedIn('auth/login'), (req, res, next) => {
 });
 
 // ejemplo de ruta mostrada con la selccion: http://localhost:3000/rutas/predefinidas/5c61b45a1472c2d438937aab
-router.get('/predefinidasjson/:id', (req, res, next) => {
+router.get('/predefinidasjson/:id', ensureLoggedIn('auth/login'), (req, res, next) => {
 	Route.findById(req.params.id)
 		.then((oneRoute) => {
 			res.json(oneRoute);
@@ -32,7 +33,7 @@ router.get('/predefinidasjson/:id', (req, res, next) => {
 });
 
 // ejemplo de ruta mostrada con la selccion: http://localhost:3000/rutas/predefinidas/5c61b45a1472c2d438937aab
-router.get('/predefinidas/:id/', (req, res, next) => {
+router.get('/predefinidas/:id/', ensureLoggedIn('auth/login'), (req, res, next) => {
 	Route.findById(req.params.id)
 		.then((oneRoute) => {
 			res.render('profile/mostrarUna', { oneRoute });
@@ -43,8 +44,22 @@ router.get('/predefinidas/:id/', (req, res, next) => {
 		});
 });
 
-router.get('/crear', (req, res, next) => {
+router.get('/crear', ensureLoggedIn('auth/login'), (req, res, next) => {
 	res.render('profile/crear-ruta');
+});
+
+router.post('/crear', ensureLoggedIn('auth/login'), (req, res, next) => {
+	console.log(JSON.parse(req.body.stations));
+	Route.create({
+		name: req.body.name,
+		description: req.body.description,
+		origen: req.body.description,
+		destination: req.body.destination,
+		waypoints: JSON.parse(req.body.stations),
+		creatorId: req.user._id
+	}).then(() => {
+		res.redirect('/');
+	});
 });
 
 router.get('/favorito', (req, res, next) => {
