@@ -9,16 +9,16 @@
   <link rel="stylesheet" href="/stylesheets/trekkingStyle.css" />
 </head>
 <body>
+{{!-- 
+  <h2>ESTO VIENE DEL LAYOUT.HBS</h2> --}}
 
-  <h2>ESTO VIENE DEL LAYOUT.HBS</h2>
-
-  <nav>
+  <nav class="navbar">
+    <a id="logo">IRONTREKKING</a>
     <a href="/">Home</a>
     <a href="/auth/login">Login</a>
     <a href="/auth/signup">Signup</a>
     <a href="/auth/logout">Logout</a>
     <a href="/rutas/predefinidas">Rutas predefinidas</a>
-
   </nav>
 
   {{{body}}}

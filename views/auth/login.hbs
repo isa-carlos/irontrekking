@@ -1,14 +1,17 @@
 
-<h2>Login</h2>
 
+<div class="login">
+  <h2>Login</h2>
 <form action="/auth/login" method="POST" id="form-container">
-  <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="JonSnow">
+<div class="fields-form">
+  <label for="username"></label>
+  <input id="username" type="text" name="username" placeholder="Nombre de usuario">
 
   <br><br>
 
-  <label for="password">Password</label>
-  <input id="password" type="password" name="password" placeholder="Your password">
+  <label for="password"></label>
+  <input id="password" type="password" name="password" placeholder="Contraseña">
+  </div>
   <br>
   {{#if message }}
     <div class="error-message">{{ message }}</div>
@@ -16,10 +19,11 @@
 
   <br><br>
 
-  <button>Login</button>
+  <button class="login-button">Login</button>
 
   <p class="account-message">
     Don't have an account yet?
     <a href="/auth/signup">Signup</a>
   </p>
 </form>
+</div>
