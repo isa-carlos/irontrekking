@@ -2,25 +2,15 @@
 
 <h3>Please, fill this form and click your waypoints, to create a new route</h3>
 
-<button id="initMap">Begin to introduce points in the map </button>
+
 <form action="/rutas/crear" method="POST">
   <input type="text" name="name" placeholder="Route Name" required>
   <input type="text" name="description" placeholder="Route Description" required>
   <input type="text" name="origen" placeholder="Origin Place" required>
   <input type="text" name="destination" placeholder="Destination Place" required>
   <input type="hidden" name="stations" id="stations">
-  {{!-- creatorId: { type: Schema.Types.ObjectId, ref: 'User' },
-  comments: [ { type: Schema.Types.ObjectId, ref: 'Comment' } ],
-  photos: [ { type: Schema.Types.ObjectId, ref: 'Photo' } ],
-   --}}
-  
   <button id="create-newRoute">Click to save Route</button>
   </form>
-  
-
-  {{!-- <script>
-    window.selectedRoute = "{{oneRoute._id}}"
-  </script> --}}
 
 
 <script>
@@ -42,8 +32,10 @@ function initMap() {
 	});
 
 	map.addListener('click', function(e) {
+    console.log(e)
 		lat = e.latLng.lat();
 		lng = e.latLng.lng();
+
 		contClick += 1;
 		
 

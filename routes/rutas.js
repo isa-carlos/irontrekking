@@ -49,7 +49,6 @@ router.get('/crear', ensureLoggedIn('auth/login'), (req, res, next) => {
 });
 
 router.post('/crear', ensureLoggedIn('auth/login'), (req, res, next) => {
-	console.log(JSON.parse(req.body.stations));
 	Route.create({
 		name: req.body.name,
 		description: req.body.description,
