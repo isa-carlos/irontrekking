@@ -22,7 +22,9 @@ mongoose
 const routes = [
 	{
 		name: 'Prueba 1 - Prueba 2',
+
 		description: 'Esta es la ruta de Maruja',
+
 		origen: 'Hola',
 		destination: 'Adios',
 		waypoints: [
@@ -41,8 +43,10 @@ const routes = [
 			{ lat: 28.145358, lng: -15.567643, name: 'Station 13' },
 			{ lat: 28.144209, lng: -15.569096, name: 'Station 14' },
 			{ lat: 28.143619, lng: -15.569954, name: 'Station 15' }
+
 		],
 		 creatorId: { _id: '5c61c8b45bb9467de445faed' }
+
 	},
 	{
 		name: 'Prueba 2 - Prueba 3',
@@ -65,8 +69,10 @@ const routes = [
 			{ lat: 28.145358, lng: -15.567643, name: 'Station 13' },
 			{ lat: 28.144209, lng: -15.569096, name: 'Station 14' },
 			{ lat: 28.143619, lng: -15.569954, name: 'Station 15' }
+
 		],
 		 creatorId: { _id: '5c605550b85a1cbed4a966cd' }
+
 	}
 ];
 
@@ -105,4 +111,6 @@ User.deleteMany()
 	});
 
 // ESTE ARCHIVO LO CARGAMOS UNA VEZ Y ASI PROBRAMOS NUESTRA BASE DE DATOS
+
 // node bin/seed.js
+
