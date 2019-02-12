@@ -1,1 +1,11 @@
-lista de rutas creadas y guardadas
+
+<div>
+  <p>Las rutas de {{user.username}} son:</p>
+  <ul>
+  {{#each routes}}
+<li><a href="rutas/{{this._id}}">{{this.name}}</a> ({{this.origen}}->{{this.destination}})</li>
+  {{/each}}
+  </ul>
+</div>
+
+
