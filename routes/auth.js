@@ -6,6 +6,7 @@ const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
 // Bcrypt to encrypt passwords
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
+const cloudinary = require('../options/cloudinary');
 
 router.get('/login', ensureLoggedOut(), (req, res, next) => {
 	res.render('auth/login', { message: req.flash('error') });
