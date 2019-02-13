@@ -22,9 +22,7 @@ mongoose
 const routes = [
 	{
 		name: 'Prueba 1 - Prueba 2',
-
 		description: 'Esta es la ruta de Maruja',
-
 		origen: 'Hola',
 		destination: 'Adios',
 		waypoints: [
@@ -43,10 +41,9 @@ const routes = [
 			{ lat: 28.145358, lng: -15.567643, name: 'Station 13' },
 			{ lat: 28.144209, lng: -15.569096, name: 'Station 14' },
 			{ lat: 28.143619, lng: -15.569954, name: 'Station 15' }
-
 		],
-		 creatorId: { _id: '5c61c8b45bb9467de445faed' }
-
+		creatorId: { _id: '5c635a43b426b5fe24674e07' }
+		// photos: { _id: '5c61c8b45bb9467de445fjjj' }
 	},
 	{
 		name: 'Prueba 2 - Prueba 3',
@@ -69,10 +66,9 @@ const routes = [
 			{ lat: 28.145358, lng: -15.567643, name: 'Station 13' },
 			{ lat: 28.144209, lng: -15.569096, name: 'Station 14' },
 			{ lat: 28.143619, lng: -15.569954, name: 'Station 15' }
-
 		],
-		 creatorId: { _id: '5c605550b85a1cbed4a966cd' }
-
+		creatorId: { _id: '5c635a43b426b5fe24674e06' }
+		// photos: { _id: '5c61c8b45bb9467de445f444' }
 	}
 ];
 
@@ -86,6 +82,21 @@ let users = [
 		password: bcrypt.hashSync('bob', bcrypt.genSaltSync(bcryptSalt))
 	}
 ];
+
+// let photos = [
+
+// 	{content: "una foto curiosa",
+// 	authorId: { _id: '5c605550b85a1cbed4a111' },
+// 	picPath: "esto es picpath",
+// 	picName: "esto es una picname"
+// 	},
+
+// 	{content: "otra foto mierdosa",
+// 	authorId: { _id: '5c605550b85a1cbed4a222' },
+// 	picPath: "esto es picpath",
+// 	picName: "esto es una picname"
+// 	}
+// ]
 
 // guardar usuarios
 // then => coger un id cualquiera
@@ -113,4 +124,3 @@ User.deleteMany()
 // ESTE ARCHIVO LO CARGAMOS UNA VEZ Y ASI PROBRAMOS NUESTRA BASE DE DATOS
 
 // node bin/seed.js
-

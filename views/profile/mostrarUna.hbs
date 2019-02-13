@@ -6,7 +6,33 @@
     <li>{{oneRoute.destination}}</li>
     
   </ul>
-{{!-- <button id="visualizeRoute">Visualize Route</button> --}}
+
+      <div class="photo-container">
+            {{#each oneRoute.photos}}
+              <img src="{{this.picPath}}">
+              <p>{{this.content}}</p>
+            {{/each}}
+        
+      </div>
+
+      <form method="POST" action="/rutas/add-photo/{{oneRoute._id}}" enctype="multipart/form-data">
+            <label for="content">Your comment:</label>
+            <textarea name="content" placeholder="Comment"></textarea>
+            <label for="photo">Upload your Photos</label>
+            <input type="file" name="photo">
+            <button> U P </button>
+      </form>
+
+  
+ <ul>
+   <li>Ciudad: {{ciudad}}</li>
+   <li>Temp min: {{min}}</li>
+   <li>Temp max: {{max}}</li>
+   <li>Prevision: {{prevision}}</li>
+ </ul>
+</div>
+ 
+
 <div id="map"></div>
 
 <script>

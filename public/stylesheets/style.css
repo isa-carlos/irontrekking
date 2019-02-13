@@ -2,6 +2,15 @@ html {
   height: 100%; }
 
 body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #00b7ff; }
+
+#map {
+  width: 400px;
+  height: 400px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #e6e8de; }
 
@@ -79,14 +88,6 @@ input[type="text"] {
   text-align: center;
   font-size: larger; }
 
-
-a {
-  color: #00b7ff; }
-
-#map {
-  width: 400px;
-  height: 400px; }
-
 .login-button {
   width: 240px;
   height: 35px;
@@ -111,6 +112,5 @@ a {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #497a78, 0px 10px 5px #999; }
-
 
 /*# sourceMappingURL=style.css.map */
