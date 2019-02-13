@@ -29,6 +29,7 @@ function loadOneRoute() {
 
 					if (done === 1) {
 						console.log(postCodes[0]);
+						return axios.post(`http://localhost:3000/rutas/meteo-data/`, { postCodes });
 					}
 				}
 			);

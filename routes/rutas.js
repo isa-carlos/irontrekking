@@ -8,6 +8,7 @@ const cloudinary = require('../options/cloudinary');
 const Meteosapi = require('meteoscrapi');
 const meteosapi = Meteosapi();
 const Photo = require('../models/photo');
+const Municipio = require('../models/municipios');
 
 // vamos a buscar todas las rutas de nuestra base de datos
 // la ruta será LOCALHOST:3000/predefinidas
@@ -124,11 +125,21 @@ router.post('/add-photo/:id', cloudinary.single('photo'), (req, res, next) => {
 
 // let proviceKey = 41004
 
-// router.get('/meteo-data',(req, res, next) => {
-// meteosapi.getSimpleForecast(proviceKey)
-// .then((previsionAemet) => {
-// 	res.render('profile/mostrarUna', )
-// 	}.then(console.log(previsionAemet));
-// });
+router.post('/meteo-data', (req, res, next) => {
+	let proviceKey = +req.body.postCodes[0];
+	//peticion a la bbdd y preguntar por el codigo de municiopio (nombre del municipo)
+	Municipio.find({codigo_postal:proviceKey})
+	.then((codigomunicipio)=>{
+		console.log(codigomunicipio[0].municipio_id)
+		meteosapi
+			.getSimpleForecast(codigomunicipio[0].municipio_id)
+			.then((previsionAemet) => {
+				
+				res.render('profile/mostrarUna', { previsionAemet });
+
+			})
+			.catch((err) => console.log('Código postal no disponible'));
+	})
+});
 
 module.exports = router;
