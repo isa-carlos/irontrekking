@@ -7,6 +7,36 @@ function loadOneRoute() {
 	axios.get(`http://localhost:3000/rutas/predefinidasjson/${window.selectedRoute}`).then((routeInfo) => {
 		var stations = routeInfo.data.waypoints;
 
+		// ESTO ES PARA RECOGER LA LAT Y LNG DEL PRIMER PUNTO DE NUESTRO TREKKING
+		var firstLat = routeInfo.data.waypoints[0].lat;
+		var firstLng = routeInfo.data.waypoints[0].lng;
+		// var firstWaypoint = [ firstLat, firstLng ];
+		// console.log(firstWaypoint);
+
+		var postCodes = [];
+
+		var done = 0;
+
+		for (var i = 0; i < 1; i++) {
+			geocodeLatLng(
+				{
+					lat: firstLat,
+					lng: firstLng
+				},
+				postCodes,
+				function() {
+					done++;
+
+					if (done === 1) {
+						console.log(postCodes[0]);
+					}
+				}
+			);
+		}
+
+		// var geocoder = new google.maps.Geocoder;
+		// var infowindow = new google.maps.InfoWindow;
+
 		// Zoom and center map automatically by stations (each station will be in visible map area)
 		var lngs = stations.map((station) => {
 			return station.lng;
@@ -66,4 +96,26 @@ function loadOneRoute() {
 			service.route(service_options, service_callback);
 		}
 	});
+}
+
+function geocodeLatLng(latlng, postCodes, cb) {
+	new google.maps.Geocoder().geocode(
+		{ location: latlng },
+		function(results, status) {
+			if (status === 'OK') {
+				if (results[0]) {
+					var code = results[0].address_components.filter((address) => {
+						return address.types[0] === 'postal_code';
+					})[0].long_name;
+
+					postCodes.push(code);
+					cb();
+				} else {
+					window.alert('No results found');
+				}
+			} else {
+				window.alert('Geocoder failed due to: ' + status);
+			}
+		}.bind(this)
+	);
 }

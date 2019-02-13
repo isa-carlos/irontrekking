@@ -7,11 +7,7 @@ const cloudinary = require('../options/cloudinary');
 // Bcrypt to encrypt passwords
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
-
-const cloudinary = require('../options/cloudinary');
-
 const Photo = require('../models/route');
-
 
 /* GET home private */
 router.get('/', ensureLoggedIn('auth/login'), (req, res, next) => {
