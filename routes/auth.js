@@ -8,6 +8,9 @@ const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 const cloudinary = require('../options/cloudinary');
 
+const Photo = require('../models/route');
+
+
 router.get('/login', ensureLoggedOut(), (req, res, next) => {
 	res.render('auth/login', { message: req.flash('error') });
 });
@@ -44,10 +47,10 @@ router.post('/signup', (req, res, next) => {
 		const hashPass = bcrypt.hashSync(password, salt);
 
 		const newUser = new User({
-			username, 
+			username,
 			password: hashPass
 		});
-		
+
 		newUser
 			.save()
 			.then(() => {

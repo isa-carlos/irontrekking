@@ -1,59 +1,58 @@
 const express = require("express");
 const router = express.Router();
-const Route = require("../models/route");
-const User = require("../models/User");
-const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
-const cloudinary = require("../options/cloudinary");
-const Meteosapi = require("meteoscrapi");
+
+const Route = require('../models/route');
+const User = require('../models/User');
+const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
+const cloudinary = require('../options/cloudinary');
+const Meteosapi = require('meteoscrapi');
 const meteosapi = Meteosapi();
+const Photo = require('../models/photo');
+
 
 // vamos a buscar todas las rutas de nuestra base de datos
 // la ruta será LOCALHOST:3000/predefinidas
 // y ahí renderizaremos nuestra hoja profile/mostrar-rutas con los resultados
 // que encontremos. Nuestro argumento allRoutes lo retornaremos a la página
 // profile/mostrar-rutas.hbs con los distintos campos que nos interese mostar
-router.get("/predefinidas", ensureLoggedIn("auth/login"), (req, res, next) => {
-  Route.find()
-    .then(allRoutes => {
-      res.render("profile/mostrar-rutas", { allRoutes });
-    })
-    .catch(error => {
-      console.log("No conecto con la base de datos", error);
-      next();
-    });
+
+// le asociamos a la busqueda de las rutas, el POPULATE para que me ponga las fotos
+router.get('/predefinidas', ensureLoggedIn('auth/login'), (req, res, next) => {
+	Route.find()
+		.then((allRoutes) => {
+			res.render('profile/mostrar-rutas', { allRoutes });
+		})
+		.catch((error) => {
+			console.log('No conecto con la base de datos', error);
+			next();
+		});
+});
+
+// ejemplo de ruta mostrada con la seleccion: http://localhost:3000/rutas/predefinidas/5c61b45a1472c2d438937aab
+router.get('/predefinidasjson/:id', ensureLoggedIn('auth/login'), (req, res, next) => {
+	Route.findById(req.params.id)
+		.then((oneRoute) => {
+			res.json(oneRoute);
+		})
+		.catch((err) => {
+			console.log('No he podido recuperar nada en la base de datos', err);
+			next();
+		});
 });
 
 // ejemplo de ruta mostrada con la selccion: http://localhost:3000/rutas/predefinidas/5c61b45a1472c2d438937aab
-router.get(
-  "/predefinidasjson/:id",
-  ensureLoggedIn("auth/login"),
-  (req, res, next) => {
-    Route.findById(req.params.id)
-      .then(oneRoute => {
-        res.json(oneRoute);
-      })
-      .catch(err => {
-        console.log("No he podido recuperar nada en la base de datos", err);
-        next();
-      });
-  }
-);
+router.get('/predefinidas/:id/', ensureLoggedIn('auth/login'), (req, res, next) => {
+	Route.findById(req.params.id)
+		.populate('photos')
+		.then((oneRoute) => {
+			res.render('profile/mostrarUna', { oneRoute });
+		})
+		.catch((err) => {
+			console.log('No he podido recuperar nada en la base de datos', err);
+			next();
+		});
+});
 
-// ejemplo de ruta mostrada con la selccion: http://localhost:3000/rutas/predefinidas/5c61b45a1472c2d438937aab
-router.get(
-  "/predefinidas/:id/",
-  ensureLoggedIn("auth/login"),
-  (req, res, next) => {
-    Route.findById(req.params.id)
-      .then(oneRoute => {
-        res.render("profile/mostrarUna", { oneRoute });
-      })
-      .catch(err => {
-        console.log("No he podido recuperar nada en la base de datos", err);
-        next();
-      });
-  }
-);
 
 router.get("/crear", ensureLoggedIn("auth/login"), (req, res, next) => {
   res.render("profile/crear-ruta");
@@ -96,6 +95,29 @@ router.get("/rutas/:id", ensureLoggedIn("/auth/login"), (req, res, next) => {
     .catch(() => {
       res.send("An error has ocurred");
     });
+});
+
+router.post('/add-photo/:id', cloudinary.single('photo'), (req, res, next) => {
+	console.log(req.body, req.file);
+	const newPhoto = new Photo({
+		content: req.body.content,
+		authorId: req.user._id,
+		picPath: req.file.secure_url,
+		picName: req.file.originalname
+	});
+
+	newPhoto
+		.save()
+		//ME DEVUELVE EL ID DEL COMENTARIO QUE SE ACABA DE GENERAR Y GUARDAR
+		.then((photo) => {
+			Route.findByIdAndUpdate(req.params.id, {
+				//LENGUAJE MONGO...INSERTAMOS EL ID DEL COMENTARIO EN EL ARRAY DEL POST Y ACTUALIZANDO EL POST CON ESA INFO
+				$push: { photos: photo._id }
+			})
+				.then(() => console.log('A photo was saved succesfully'))
+				.catch((err) => console.log('An error ocurred refering a photo', err));
+		})
+		.catch((err) => console.log('An error ocurred saving a photo in db', err));
 });
 
 module.exports = router;
