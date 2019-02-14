@@ -4,7 +4,7 @@ function loadOneRoute() {
 	var service = new google.maps.DirectionsService();
 	var map = new google.maps.Map(document.getElementById('map'));
 
-	axios.get(`/rutas/predefinidasjson/${window.selectedRoute}`).then((routeInfo) => {
+	axios.get(`${window.host}/rutas/predefinidasjson/${window.selectedRoute}`).then((routeInfo) => {
 		var stations = routeInfo.data.waypoints;
 
 		// ESTO ES PARA RECOGER LA LAT Y LNG DEL PRIMER PUNTO DE NUESTRO TREKKING
