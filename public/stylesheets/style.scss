@@ -42,9 +42,8 @@ a {
 	padding-top: 20px;
 }
 
-#main-user{
-  z-index: 3;
-  
+#main-user {
+	z-index: 3;
 }
 
 .welcome-user {
@@ -203,9 +202,10 @@ li {
 }
 
 .enlace {
-	text-align: right;
+	text-align: center;
 	margin-right: 10px;
 	margin-top: 5px;
+	font-size: 20px;
 }
 .enlace a {
 	color: #7f7f7f;
@@ -218,12 +218,12 @@ li {
 	text-align: center;
 }
 
-#smallMap {
-	border: 3px solid #9aa2ab;
-	border-radius: 6px;
-	height: 400px;
-	margin: 10px;
-}
+// #smallMap {
+// 	border: 3px solid #9aa2ab;
+// 	border-radius: 6px;
+// 	height: 400px;
+// 	margin: 10px;
+// }
 
 .mostrar-una {
 	border-radius: 6px;
@@ -419,4 +419,15 @@ div #map {
 	font-size: 30px;
 	font-weight: bolder;
 	text-align: center;
+}
+
+.bloqueRutas {
+	background: gray;
+	color: white;
+	border: solid 2px #1aa05e;
+	width: 70%;
+}
+
+.cadabloque {
+	background: #1aa05e;
 }
