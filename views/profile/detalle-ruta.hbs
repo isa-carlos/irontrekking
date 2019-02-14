@@ -10,3 +10,27 @@
     
 
   </div>
+
+
+<div class="comment-container">
+    <form method="POST" action="/rutas/add-photo/{{ruta._id}}" enctype="multipart/form-data">
+      
+        <label for="content">Your comment:</label><br>
+        <textarea class="textarea" name="content" placeholder="Comment"></textarea><br>
+        <button class="comment-button">Comment!</button>
+        <br>
+      
+        <label for="photo">Upload your Photos</label><br>
+        <input type="file" name="photo"><br>
+        <button class="upload-button"> Upload! </button>
+    </form>
+  </div>
+</div>
+<div id="weather-list" class="prevision-metereologica"></div>
+<div id="map"></div>
+
+<script>
+  window.selectedRoute = "{{ruta._id}}"
+</script>
+
+<script src="/javascripts/drawmap.js"></script>
