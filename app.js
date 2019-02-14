@@ -74,10 +74,22 @@ app.use(
 	})
 );
 
+
+
 // middleware de flash para los mensajes de error
 // se autodestruye el mensaje que se muestra para no ocupar moemoria
 app.use(flash());
 require('./passport')(app);
+
+app.use(function (req, res, next) {
+	res.locals = {
+		user: req.user
+	};
+	console.log("isa")
+	console.log(res.locals)
+	
+	next();
+});
 
 const index = require('./routes/index');
 app.use('/', index);

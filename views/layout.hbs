@@ -13,16 +13,20 @@
 <body>
 {{!-- 
   <h2>ESTO VIENE DEL LAYOUT.HBS</h2> --}}
-
+ <a id="main-user">{{user.username}}</a> 
   <nav class="navbar">
-  
+    {{#if user.username}}
+    <a href="/profile">Home</a>
+    {{/if}}
     {{#unless user.username}}
     <a href="/auth/login">Login</a>
     <a href="/auth/signup">Signup</a>
     {{/unless}}
-    <a id="main-user">{{user.username}}</a> 
-    <a href="/profile">Home</a>  
+    
+    {{#if user.username}}
     <a href="/auth/logout">Logout</a>
+    {{/if}}
+    
 
 
   </nav>
