@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 
@@ -46,7 +47,7 @@ router.get('/predefinidas/:id/', ensureLoggedIn('auth/login'), (req, res, next) 
 	Route.findById(req.params.id)
 		.populate('photos')
 		.then((oneRoute) => {
-			res.render('profile/mostrarUna', { oneRoute });
+			res.render('profile/mostrarUna', { oneRoute, host: process.env.HOST });
 		})
 		.catch((err) => {
 			console.log('No he podido recuperar nada en la base de datos', err);
@@ -91,7 +92,7 @@ router.get('/rutas/:id', ensureLoggedIn('/auth/login'), (req, res, next) => {
 	let idRuta = req.params.id;
 	Route.findById(idRuta)
 		.then((ruta) => {
-			res.render('profile/detalle-ruta', { ruta: ruta });
+			res.render('profile/detalle-ruta', { ruta: ruta, host: process.env.HOST });
 		})
 		.catch(() => {
 			res.send('An error has ocurred');

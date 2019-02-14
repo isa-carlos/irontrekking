@@ -1,18 +1,19 @@
 
-</div>
+
 <div class="mostrar-una">
     <h2>Route Information</h2>
     <div class="info-ruta">
       <br>
-      <p>Route name: {{ruta.name}}</p>
-      <p>Description: {{ruta.description}}</p>
-      <p>Journey: {{ruta.origen}}/{{ruta.destination}}</p>
+      <p>Route name: {{oneRoute.name}}</p>
+      <p>Description: {{oneRoute.description}}</p>
+      <p>Journey: {{oneRoute.origen}}/{{oneRoute.destination}}</p>
     </div>
   </div>
+  
 <div class="coment-map-weather">
   
   <div class="comment-container">
-    <form method="POST" action="/rutas/add-photo/{{ruta._id}}" enctype="multipart/form-data">
+    <form method="POST" action="/rutas/add-photo/{{oneRoute._id}}" enctype="multipart/form-data">
 
       <label for="content">Your comment:</label><br>
       <textarea class="textarea" name="content" placeholder="Comment"></textarea>
@@ -31,6 +32,7 @@
 
 <script>
   window.selectedRoute = "{{oneRoute._id}}"
+  window.host = "{{host}}"
 </script>
 
 <script src="/javascripts/drawmap.js"></script>

@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0; }
 
@@ -22,7 +23,7 @@ a {
 
 #menu p {
   border: 1px solid #dcedc8;
-  background-color: #1AA05E;
+  background-color: #1aa05e;
   border-radius: 6px;
   width: -webkit-fill-available;
   margin: 0 20px;
@@ -53,7 +54,7 @@ a {
 .navbar {
   width: 100%;
   height: 75px;
-  background-color: #1AA05E;
+  background-color: #1aa05e;
   color: #dcedc8;
   position: fixed;
   top: 0;
@@ -148,7 +149,7 @@ input[type="text"] {
   /* position: relative; */
   cursor: pointer;
   border: none;
-  background-color: #1AA05E;
+  background-color: #1aa05e;
   background-image: linear-gradient(top, #3db0a6, #33691e);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -210,7 +211,7 @@ li {
   display: block;
   text-align: center;
   border-radius: 6px;
-  color: #1AA05E;
+  color: #1aa05e;
   /* background-color: #9aa2ab; */
   font-size: 42px; }
 
@@ -224,14 +225,24 @@ li {
 
 .prevision-metereologica {
   height: fit-content;
-  margin-left: 40px; }
+  margin-left: 40px;
+  background: #1aa05e;
+  border: #1aa05e 2px solid;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  margin: 0 10px 0 0;
+  width: 20%; }
 
 .coment-map-weather {
-  display: flex; }
+  display: flex;
+  justify-content: space-evenly; }
 
 .comment-container {
   margin: 12px;
-  font-size: 25px; }
+  font-size: 25px;
+  width: 20%; }
 
 .comment-container form {
   width: 60%; }
@@ -245,7 +256,7 @@ li {
     content: "Second line \A Third line\A You get the picture..."; }
 
 div #map {
-  width: 60%;
+  width: 50%;
   border: 2px solid red; }
 
 .comment-button {
@@ -263,7 +274,7 @@ div #map {
   /* position: relative; */
   cursor: pointer;
   border: none;
-  background-color: #1AA05E;
+  background-color: #1aa05e;
   background-image: linear-gradient(top, #3db0a6, #33691e);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -286,7 +297,7 @@ div #map {
   /* position: relative; */
   cursor: pointer;
   border: none;
-  background-color: #1AA05E;
+  background-color: #1aa05e;
   background-image: linear-gradient(top, #3db0a6, #33691e);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -309,7 +320,7 @@ div #map {
   /* position: relative; */
   cursor: pointer;
   border: none;
-  background-color: #1AA05E;
+  background-color: #1aa05e;
   background-image: linear-gradient(top, #3db0a6, #33691e);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -320,7 +331,7 @@ div #map {
 .introduce {
   margin-left: 60px;
   font-size: x-large;
-  color: #1AA05E; }
+  color: #1aa05e; }
 
 .form-crear-ruta {
   position: fixed;
@@ -330,13 +341,13 @@ div #map {
   margin-top: 100px; }
 
 .mi-listado-de-rutas p {
-  color: #1AA05E;
+  color: #1aa05e;
   font-size: 45px;
   font-weight: bolder;
   text-align: center; }
 
 .enlace-rutas {
-  color: #1AA05E;
+  color: #1aa05e;
   font-size: 30px;
   font-weight: bolder;
   text-align: center; }
