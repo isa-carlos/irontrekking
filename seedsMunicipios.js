@@ -1,10 +1,11 @@
 require('dotenv').config();
+
 const mongoose = require('mongoose');
 const Municipios = require('./models/municipios');
 
 
 mongoose
-	.connect(`mongodb://localhost/${process.env.DB}`,
+	.connect(`mongodb://localhost/${process.env.KEY_ATLAS}`,
  { useNewUrlParser: true })
 	.then((x) => {
 		console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);

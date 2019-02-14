@@ -3,6 +3,8 @@
 // To execute this seed, run from the root of the project
 // $ node bin/seeds.js
 require('dotenv').config();
+
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const User = require('./models/User');
@@ -10,7 +12,7 @@ const Route = require('./models/route');
 const bcryptSalt = 10;
 
 mongoose
-	.connect(`mongodb://localhost/${process.env.DB}`, { useNewUrlParser: true })
+	.connect(`mongodb://localhost/${process.env.KEY_ATLAS}`, { useNewUrlParser: true })
 	.then((x) => {
 		console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
 		console.log(process.env.DB);
