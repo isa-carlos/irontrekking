@@ -5,21 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>{{title}}</title>
+  
   <link rel="stylesheet" href="/stylesheets/style.css" />
   <link rel="stylesheet" href="/stylesheets/trekkingStyle.css" />
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 </head>
 <body>
 {{!-- 
   <h2>ESTO VIENE DEL LAYOUT.HBS</h2> --}}
 
   <nav class="navbar">
-    <a id="logo">IRONTREKKING</a>
-    <a href="/">Home</a>
+    <a id="main-user">{{user.username}}</a> 
+    <a href="/profile">Home</a>
+    {{#unless user.username}}
     <a href="/auth/login">Login</a>
     <a href="/auth/signup">Signup</a>
+    {{/unless}}
     <a href="/auth/logout">Logout</a>
-    <a href="/rutas/predefinidas">Rutas predefinidas</a>
+
   </nav>
+  {{!-- <div id="logo"><p >IRONTREKKING</p></div> --}}
 
   {{{body}}}
 

@@ -1,12 +1,12 @@
 
 
-
+<div class="todas-mis-rutas">
 <h2>Todas mis rutas</h2>
     <ul>
   {{#each allRoutes}}
   <li>{{this.name}}</li>
   <div id="smallMap"></div>
-  <a href="/rutas/predefinidas/{{this._id}}">see more</a>
+  <p class="enlace"><a  href="/rutas/predefinidas/{{this._id}}">see more</a></p>
   {{!-- <a href="/rutas/{{this._id}}/edit">edit</a> --}}
   {{!-- <form action="/rutas/predefinidas/{{this._id}}/delete" method="POST">
     <button type="submit">Delete</button>
@@ -15,3 +15,4 @@
   {{/each}}
     </ul>
   {{!-- <a href="/rutas/predefinidas/new">new route</a> --}}
+  </div>

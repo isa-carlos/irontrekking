@@ -1,49 +1,55 @@
-<h2>Route Information</h2>
-  <ul>
-    <li>{{oneRoute.name}}</li>
-    <li>{{oneRoute.description}}</li>
-    <li>{{oneRoute.origen}}</li>
-    <li>{{oneRoute.destination}}</li>
-    
-  </ul>
 
 
-      <div class="photo-container">
-            {{#each oneRoute.photos}}
-              <img src="{{this.picPath}}">
-              <p>{{this.content}}</p>
-            {{/each}}
-        
-      </div>
 
-      <form method="POST" action="/rutas/add-photo/{{oneRoute._id}}" enctype="multipart/form-data">
-            <label for="content">Your comment:</label>
-            <textarea name="content" placeholder="Comment"></textarea>
-            <label for="photo">Upload your Photos</label>
-            <input type="file" name="photo">
-            <button> U P </button>
-      </form>
 
-  <div id="weather-list">
+  <div class="mostrar-una">
+  <h2>Route Information</h2>
+  <div class="info-ruta">
+    <br>
+    <p>Route name: {{oneRoute.name}}</p>
+    <p>Description: {{oneRoute.description}}</p>
+    <p>Journey: {{oneRoute.origen}}/{{oneRoute.destination}}</p>
 
-    {{!-- <h3> ${weather.data.name} </h3>
-   <li>Localidad:{{weather.name}}</li>
-   <li>Provincia: {{weather.province}}</li>
-   <h3>Today</h3>
-   <li>Temp min: {{weather.today.tmp.min}}</li>
-   <li>Temp max: {{weather.today.tmp.max}}</li>
-   <h3>Tomorrow</h3>
-   <li>Temp min: {{weather.tomorrow.tmp.min}}</li>
-   <li>Temp max: {{weather.tomorrow.tmp.min}}</li>
-   <li>Prevision Lluvia: {{weather.next2.description}}</li>
-   <li>Probabilidad: {{weather.next2.rainProb}}</li>
-    --}}
+  </div>
+
+
+      
+
+      
+      <div class="social-container">
+  <div class="photo-container">
+    {{#each oneRoute.photos}}
+    <img src="{{this.picPath}}">
+    <p>{{this.content}}</p>
+    {{/each}}
+
+  </div>
+  <div class="comment-container">
+    <form method="POST" action="/rutas/add-photo/{{oneRoute._id}}" enctype="multipart/form-data">
+      
+        <label for="content">Your comment:</label><br>
+        <textarea class="textarea" name="content" placeholder="Comment"></textarea><br>
+        <button class="comment-button">Comment!</button>
+        <br>
+      
+        <label for="photo">Upload your Photos</label><br>
+        <input type="file" name="photo"><br>
+        <button class="upload-button"> Upload! </button>
+    </form>
+  </div>
+</div>
+      
+      
+
+  <div id="weather-list" class="prevision-metereologica">
+
 
 </div>
 
 
 
 <div id="map"></div>
+
 
 <script>
   window.selectedRoute = "{{oneRoute._id}}"
