@@ -8,6 +8,7 @@ const RouteSchema = new Schema(
 		origen: String,
 		destination: String,
 		waypoints: [ { lat: Number, lng: Number, name: String } ],
+		municipioCode: Number,
 		creatorId: { type: Schema.Types.ObjectId, ref: 'User' },
 		photos: [ { type: Schema.Types.ObjectId, ref: 'Photo' } ]
 	},

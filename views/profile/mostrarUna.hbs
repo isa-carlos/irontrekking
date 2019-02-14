@@ -1,4 +1,8 @@
-<div class="mostrar-una">
+
+
+
+
+  <div class="mostrar-una">
   <h2>Route Information</h2>
   <div class="info-ruta">
     <br>
@@ -8,19 +12,11 @@
 
   </div>
 
-  <div class="prevision-metereologica">
 
-    <p>Location: {{ciudad}}</p>
-    <p>Temp min: {{min}}</p>
-    <p>Temp max: {{max}}</p>
-    <p>Prevision: {{prevision}}</p>
+      
 
-  </div>
-
-  <div id="map"></div>
-
-</div>
-<div class="social-container">
+      
+      <div class="social-container">
   <div class="photo-container">
     {{#each oneRoute.photos}}
     <img src="{{this.picPath}}">
@@ -42,6 +38,18 @@
     </form>
   </div>
 </div>
+      
+      
+
+  <div id="weather-list" class="prevision-metereologica">
+
+
+</div>
+
+
+
+<div id="map"></div>
+
 
 <script>
   window.selectedRoute = "{{oneRoute._id}}"

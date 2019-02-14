@@ -7,6 +7,75 @@ function loadOneRoute() {
 	axios.get(`http://localhost:3000/rutas/predefinidasjson/${window.selectedRoute}`).then((routeInfo) => {
 		var stations = routeInfo.data.waypoints;
 
+		// ESTO ES PARA RECOGER LA LAT Y LNG DEL PRIMER PUNTO DE NUESTRO TREKKING
+		var firstLat = routeInfo.data.waypoints[0].lat;
+		var firstLng = routeInfo.data.waypoints[0].lng;
+		// var firstWaypoint = [ firstLat, firstLng ];
+		// console.log(firstWaypoint);
+
+		var postCodes = [];
+
+		var done = 0;
+
+		for (var i = 0; i < 1; i++) {
+			geocodeLatLng(
+				{
+					lat: firstLat,
+					lng: firstLng
+				},
+				postCodes,
+				function() {
+					done++;
+
+					if (done === 1) {
+						 axios.post(`http://localhost:3000/rutas/meteo-data/`, { postCodes })
+						 .then(weather => {
+							
+							const { name, province} = weather.data;
+							
+
+							const newCharacterHtml = `
+							
+								<h3> Localidad: ${name} </h3>
+								<p> Provincia: ${province} </p>
+								<h4>Today</h3>
+								<p>Temp min: ${weather.data.today.tmp.min}</p>
+								<p>Temp min: ${weather.data.today.tmp.max}</p>
+								<h4>Tomorrow</h3>
+                <p>Temp min: ${weather.data.tomorrow.tmp.min}</p>
+                <p>Temp max: ${weather.data.tomorrow.tmp.max}</p>
+                <p>Prevision Lluvia: ${weather.data.next2.description}</p>
+                <p>Probabilidad: ${weather.data.next2.rainProb}%</p>
+							`;
+							document.getElementById("weather-list").innerHTML += newCharacterHtml;
+								
+							})
+							.catch(error => {
+									console.log("Error is: ", error);
+							})
+					}
+				
+			})
+		}
+		
+		
+
+		// {{!-- <h3> ${weather.data.name} </h3>
+		// <li>Localidad:{{weather.data.name}}</li>
+		// <li>Provincia: {{weather.data.province}}</li>
+		// <h3>Today</h3>
+		// <li>Temp min: {{weather.data.today.tmp.min}}</li>
+		// <li>Temp max: {{weather.data.today.tmp.max}}</li>
+		// <h3>Tomorrow</h3>
+		// <li>Temp min: {{weather.data.tomorrow.tmp.min}}</li>
+		// <li>Temp max: {{weather.data.tomorrow.tmp.min}}</li>
+		// <li>Prevision Lluvia: {{weather.data.next2.description}}</li>
+		// <li>Probabilidad: {{weather.data.next2.rainProb}}</li>
+		//  --}}
+
+		// var geocoder = new google.maps.Geocoder;
+		// var infowindow = new google.maps.InfoWindow;
+
 		// Zoom and center map automatically by stations (each station will be in visible map area)
 		var lngs = stations.map((station) => {
 			return station.lng;
@@ -22,6 +91,8 @@ function loadOneRoute() {
 			north: Math.min.apply(null, lats),
 			south: Math.max.apply(null, lats)
 		});
+
+		
 
 		// Show stations on the map as markers
 		for (var i = 0; i < stations.length; i++) {
@@ -66,4 +137,26 @@ function loadOneRoute() {
 			service.route(service_options, service_callback);
 		}
 	});
+}
+
+function geocodeLatLng(latlng, postCodes, cb) {
+	new google.maps.Geocoder().geocode(
+		{ location: latlng },
+		function(results, status) {
+			if (status === 'OK') {
+				if (results[0]) {
+					var code = results[0].address_components.filter((address) => {
+						return address.types[0] === 'postal_code';
+					})[0].long_name;
+
+					postCodes.push(code);
+					cb();
+				} else {
+					window.alert('No results found');
+				}
+			} else {
+				window.alert('Geocoder failed due to: ' + status);
+			}
+		}.bind(this)
+	);
 }

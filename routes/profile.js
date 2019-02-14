@@ -8,10 +8,7 @@ const cloudinary = require('../options/cloudinary');
 const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 
-
-
 const Photo = require('../models/route');
-
 
 /* GET home private */
 router.get('/', ensureLoggedIn('auth/login'), (req, res, next) => {

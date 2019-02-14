@@ -13,6 +13,8 @@
   </form>
 	</div>
 
+  <button id="now">Draw</button>
+
 
 <script>
 
@@ -33,7 +35,7 @@ function initMap() {
 	});
 
 	map.addListener('click', function(e) {
-    console.log(e)
+    
 		lat = e.latLng.lat();
 		lng = e.latLng.lng();
 
@@ -49,9 +51,11 @@ function initMap() {
 		});
 
 		stations.push({ lat: lat, lng: lng, name: `Station: ${contClick}` });
-    console.log(stations)
+
+    
     document.querySelector("#stations").value = JSON.stringify(stations);
-		waypts.push({
+		
+    waypts.push({
 			location: new google.maps.LatLng(lat, lng),
 			stopover: true
 		});
@@ -59,10 +63,82 @@ function initMap() {
 
 	directionsDisplay.setMap(map);
 
+  document.getElementById("now").onclick = function () {
+  calculateAndDisplayRoute(directionsService, directionsDisplay);
+  }
+
 	
 }
 
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+      directionsService.route({
+        origin: "Tejeda",
+        destination:  "Artenara",
+        waypoints: waypts,
+        optimizeWaypoints: true,
+        travelMode: 'WALKING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
 
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+    }
+</script>
 
+<script>
 
+map.addListener('click', function (e) {
+        
+        lat = e.latLng.lat()
+        lng = e.latLng.lng()
+        contClick +=1
+        
+        new google.maps.Marker({
+          map: map,
+          position: {
+            lat: lat,
+            lng: lng,
+          }
+          
+        })
+
+        route.push({lat: lat, lng: lng, name: `Station: ${contClick}`})
+        console.log(route)
+        waypts.push({
+          location: new google.maps.LatLng(lat, lng),
+          stopover: true
+          
+        });
+       
+      });
+
+      directionsDisplay.setMap(map);
+
+      document.getElementById("now").onclick = function () {
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+      }
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+      directionsService.route({
+        origin: "Tejeda",
+        destination:  "Artenara",
+        waypoints: waypts,
+        optimizeWaypoints: true,
+        travelMode: 'WALKING'
+      }, function (response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
+
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+    }
+  </script>
+  
+  
 </script>

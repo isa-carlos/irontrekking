@@ -3,16 +3,18 @@ const router = express.Router();
 const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
 const cloudinary = require('../options/cloudinary');
 
-const Meteosapi = require("meteoscrapi");
+const Meteosapi = require('meteoscrapi');
 const meteosapi = Meteosapi();
 
 const Photo = require('../models/route');
-
 
 /* GET home page */
 router.get('/', (req, res, next) => {
 	res.render('index');
 });
-let proviceKey = 28015;
-meteosapi.getForecast(proviceKey).then(console.log);
+
+// let proviceKey = 28015;
+// meteosapi.getForecast(proviceKey).then(console.log);
+// module.exports = router;
+
 module.exports = router;
