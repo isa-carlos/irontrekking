@@ -61,12 +61,12 @@ router.post('/crear', ensureLoggedIn('auth/login'), (req, res, next) => {
 	Route.create({
 		name: req.body.name,
 		description: req.body.description,
-		origen: req.body.description,
+		origen: req.body.origen,
 		destination: req.body.destination,
 		waypoints: JSON.parse(req.body.stations),
 		creatorId: req.user._id
 	}).then(() => {
-		res.redirect('/');
+		res.redirect('/misrutas');
 	});
 });
 
