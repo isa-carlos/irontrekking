@@ -20,6 +20,7 @@ const Municipio = require('../models/municipios');
 router.get('/predefinidas', ensureLoggedIn('auth/login'), (req, res, next) => {
 	Route.find()
 		.then((allRoutes) => {
+			console.log(req.app.locals)
 			res.render('profile/mostrar-rutas', { allRoutes });
 		})
 		.catch((error) => {
