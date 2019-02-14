@@ -16,7 +16,7 @@ const flash = require('connect-flash');
 mongoose
 	.connect(`${process.env.KEY_ATLAS}`, { useNewUrlParser: true })
 	.then((x) => {
-		console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
+		console.log(`Connected to Mongo! Database: "${x.connections[0].host}"`);
 	})
 	.catch((err) => {
 		console.error('Error connecting to mongo', err);
