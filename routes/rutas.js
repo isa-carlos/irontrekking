@@ -77,6 +77,7 @@ router.get('/favorito', (req, res, next) => {
 router.get('/misrutas', (req, res, next) => {
 	let idUsuario = req.user._id;
 	Route.find({ creatorId: idUsuario })
+		.populate('photos')
 		.then((data) => {
 			res.render('profile/mis-rutas', { user: req.user, routes: data });
 		})
@@ -97,7 +98,6 @@ router.get('/rutas/:id', ensureLoggedIn('/auth/login'), (req, res, next) => {
 });
 
 router.post('/add-photo/:id', cloudinary.single('photo'), (req, res, next) => {
-	console.log(req.body, req.file);
 	const newPhoto = new Photo({
 		content: req.body.content,
 		authorId: req.user._id,
@@ -128,19 +128,14 @@ router.post('/add-photo/:id', cloudinary.single('photo'), (req, res, next) => {
 router.post('/meteo-data', (req, res, next) => {
 	let proviceKey = +req.body.postCodes[0];
 	//peticion a la bbdd y preguntar por el codigo de municiopio (nombre del municipo)
-	Municipio.find({codigo_postal:proviceKey})
-	.then((codigomunicipio)=>{
-		
+	Municipio.find({ codigo_postal: proviceKey }).then((codigomunicipio) => {
 		meteosapi
 			.getSimpleForecast(codigomunicipio[0].municipio_id)
 			.then((weather) => {
-
-				
-				res.json((weather));
-
+				res.json(weather);
 			})
 			.catch((err) => console.log('Código postal no disponible'));
-	})
+	});
 });
 
 module.exports = router;
