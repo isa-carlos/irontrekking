@@ -1,40 +1,47 @@
-<h2>Route Information</h2>
-  <ul>
-    <li>{{oneRoute.name}}</li>
-    <li>{{oneRoute.description}}</li>
-    <li>{{oneRoute.origen}}</li>
-    <li>{{oneRoute.destination}}</li>
-    
-  </ul>
+<div class="mostrar-una">
+  <h2>Route Information</h2>
+  <div class="info-ruta">
+    <br>
+    <p>Route name: {{oneRoute.name}}</p>
+    <p>Description: {{oneRoute.description}}</p>
+    <p>Journey: {{oneRoute.origen}}/{{oneRoute.destination}}</p>
 
+  </div>
 
-      <div class="photo-container">
-            {{#each oneRoute.photos}}
-              <img src="{{this.picPath}}">
-              <p>{{this.content}}</p>
-            {{/each}}
-        
-      </div>
+  <div class="prevision-metereologica">
 
-      <form method="POST" action="/rutas/add-photo/{{oneRoute._id}}" enctype="multipart/form-data">
-            <label for="content">Your comment:</label>
-            <textarea name="content" placeholder="Comment"></textarea>
-            <label for="photo">Upload your Photos</label>
-            <input type="file" name="photo">
-            <button> U P </button>
-      </form>
+    <p>Location: {{ciudad}}</p>
+    <p>Temp min: {{min}}</p>
+    <p>Temp max: {{max}}</p>
+    <p>Prevision: {{prevision}}</p>
 
-  
+  </div>
 
- <ul>
-   <li>Ciudad: {{ciudad}}</li>
-   <li>Temp min: {{min}}</li>
-   <li>Temp max: {{max}}</li>
-   <li>Prevision: {{prevision}}</li>
- </ul>
+  <div id="map"></div>
+
 </div>
+<div class="social-container">
+  <div class="photo-container">
+    {{#each oneRoute.photos}}
+    <img src="{{this.picPath}}">
+    <p>{{this.content}}</p>
+    {{/each}}
 
-<div id="map"></div>
+  </div>
+  <div class="comment-container">
+    <form method="POST" action="/rutas/add-photo/{{oneRoute._id}}" enctype="multipart/form-data">
+      
+        <label for="content">Your comment:</label><br>
+        <textarea class="textarea" name="content" placeholder="Comment"></textarea><br>
+        <button class="comment-button">Comment!</button>
+        <br>
+      
+        <label for="photo">Upload your Photos</label><br>
+        <input type="file" name="photo"><br>
+        <button class="upload-button"> Upload! </button>
+    </form>
+  </div>
+</div>
 
 <script>
   window.selectedRoute = "{{oneRoute._id}}"
