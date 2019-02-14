@@ -113,7 +113,7 @@ router.post('/add-photo/:id', cloudinary.single('photo'), (req, res, next) => {
 				//LENGUAJE MONGO...INSERTAMOS EL ID DEL COMENTARIO EN EL ARRAY DEL POST Y ACTUALIZANDO EL POST CON ESA INFO
 				$push: { photos: photo._id }
 			})
-				.then(() => console.log('A photo was saved succesfully'))
+				.then(() => res.redirect('/rutas/predefinidas'))
 				.catch((err) => console.log('An error ocurred refering a photo', err));
 		})
 		.catch((err) => console.log('An error ocurred saving a photo in db', err));
