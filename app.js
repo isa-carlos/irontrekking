@@ -14,8 +14,8 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 // const User = require("./models/user")
 
-
-	.connect('mongodb://localhost/${process.env.KEY_ATLAS}', { useNewUrlParser: true })
+mongoose
+	.connect(`${process.env.KEY_ATLAS}`, { useNewUrlParser: true })
 
 	.then((x) => {
 		console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`);
