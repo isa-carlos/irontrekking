@@ -130,12 +130,13 @@ router.post('/meteo-data', (req, res, next) => {
 	//peticion a la bbdd y preguntar por el codigo de municiopio (nombre del municipo)
 	Municipio.find({codigo_postal:proviceKey})
 	.then((codigomunicipio)=>{
-		console.log(codigomunicipio[0].municipio_id)
+		
 		meteosapi
 			.getSimpleForecast(codigomunicipio[0].municipio_id)
-			.then((previsionAemet) => {
+			.then((weather) => {
+
 				
-				res.render('profile/mostrarUna', { previsionAemet });
+				res.json((weather));
 
 			})
 			.catch((err) => console.log('Código postal no disponible'));

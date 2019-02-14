@@ -28,12 +28,50 @@ function loadOneRoute() {
 					done++;
 
 					if (done === 1) {
-						console.log(postCodes[0]);
-						return axios.post(`http://localhost:3000/rutas/meteo-data/`, { postCodes });
+						 axios.post(`http://localhost:3000/rutas/meteo-data/`, { postCodes })
+						 .then(weather => {
+							
+							const { name, province} = weather.data;
+							
+
+							const newCharacterHtml = `
+							
+								<h3> Localidad: ${name} </h3>
+								<p> Provincia: ${province} </p>
+								<h4>Today</h3>
+								<p>Temp min: ${weather.data.today.tmp.min}</p>
+								<p>Temp min: ${weather.data.today.tmp.max}</p>
+								<h4>Tomorrow</h3>
+                <p>Temp min: ${weather.data.tomorrow.tmp.min}</p>
+                <p>Temp max: ${weather.data.tomorrow.tmp.max}</p>
+                <p>Prevision Lluvia: ${weather.data.next2.description}</p>
+                <p>Probabilidad: ${weather.data.next2.rainProb}%</p>
+							`;
+							document.getElementById("weather-list").innerHTML += newCharacterHtml;
+								
+							})
+							.catch(error => {
+									console.log("Error is: ", error);
+							})
 					}
-				}
-			);
+				
+			})
 		}
+		
+		
+
+		// {{!-- <h3> ${weather.data.name} </h3>
+		// <li>Localidad:{{weather.data.name}}</li>
+		// <li>Provincia: {{weather.data.province}}</li>
+		// <h3>Today</h3>
+		// <li>Temp min: {{weather.data.today.tmp.min}}</li>
+		// <li>Temp max: {{weather.data.today.tmp.max}}</li>
+		// <h3>Tomorrow</h3>
+		// <li>Temp min: {{weather.data.tomorrow.tmp.min}}</li>
+		// <li>Temp max: {{weather.data.tomorrow.tmp.min}}</li>
+		// <li>Prevision Lluvia: {{weather.data.next2.description}}</li>
+		// <li>Probabilidad: {{weather.data.next2.rainProb}}</li>
+		//  --}}
 
 		// var geocoder = new google.maps.Geocoder;
 		// var infowindow = new google.maps.InfoWindow;
@@ -53,6 +91,8 @@ function loadOneRoute() {
 			north: Math.min.apply(null, lats),
 			south: Math.max.apply(null, lats)
 		});
+
+		
 
 		// Show stations on the map as markers
 		for (var i = 0; i < stations.length; i++) {
