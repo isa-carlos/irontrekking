@@ -4,7 +4,7 @@ function loadOneRoute() {
 	var service = new google.maps.DirectionsService();
 	var map = new google.maps.Map(document.getElementById('map'));
 
-	axios.get(`http://localhost:3000/rutas/predefinidasjson/${window.selectedRoute}`).then((routeInfo) => {
+	axios.get(`/rutas/predefinidasjson/${window.selectedRoute}`).then((routeInfo) => {
 		var stations = routeInfo.data.waypoints;
 
 		// ESTO ES PARA RECOGER LA LAT Y LNG DEL PRIMER PUNTO DE NUESTRO TREKKING
@@ -28,13 +28,12 @@ function loadOneRoute() {
 					done++;
 
 					if (done === 1) {
-						 axios.post(`http://localhost:3000/rutas/meteo-data/`, { postCodes })
-						 .then(weather => {
-							
-							const { name, province} = weather.data;
-							
+						axios
+							.post(`/rutas/meteo-data/`, { postCodes })
+							.then((weather) => {
+								const { name, province } = weather.data;
 
-							const newCharacterHtml = `
+								const newCharacterHtml = `
 							
 								<h3> Localidad: ${name} </h3>
 								<p> Provincia: ${province} </p>
@@ -47,18 +46,15 @@ function loadOneRoute() {
                 <p>Prevision Lluvia: ${weather.data.next2.description}</p>
                 <p>Probabilidad: ${weather.data.next2.rainProb}%</p>
 							`;
-							document.getElementById("weather-list").innerHTML += newCharacterHtml;
-								
+								document.getElementById('weather-list').innerHTML += newCharacterHtml;
 							})
-							.catch(error => {
-									console.log("Error is: ", error);
-							})
+							.catch((error) => {
+								console.log('Error is: ', error);
+							});
 					}
-				
-			})
+				}
+			);
 		}
-		
-		
 
 		// {{!-- <h3> ${weather.data.name} </h3>
 		// <li>Localidad:{{weather.data.name}}</li>
@@ -91,8 +87,6 @@ function loadOneRoute() {
 			north: Math.min.apply(null, lats),
 			south: Math.max.apply(null, lats)
 		});
-
-		
 
 		// Show stations on the map as markers
 		for (var i = 0; i < stations.length; i++) {
